@@ -1,17 +1,36 @@
 # 待办事项
 
-> Last updated: 2026-03-07 23:09
+> Status: idle
+> UpdatedAt: 2026-03-08T09:13:00+08:00
 > Auto-sync: Enabled (sync-todo.js)
 
 ---
 
+
+
 ## In Progress
+
+
 
 _No tasks in progress_
 
 ---
 
+### 🔄 Auto-Memory Implementation
+
+> Started: 2026-03-08T01:17:06.992+08:00
+> Status: running
+
+Implement automatic memory writing and todo sync
+
+
+
 ## Completed
+
+> ID: auto-memory-impl
+**Summary**: Scripts created and tested successfully
+
+
 
 ### ✅ 长时任务最佳实践整合 (2026-03-07 23:30)
 
@@ -50,17 +69,17 @@ _No tasks in progress_
 
 ---
 
+
+
 ## Backlog
+
+
 
 _No planned tasks_
 
 ---
 
-## Backlog
 
-_No planned tasks_
-
----
 
 ## System Status
 
@@ -68,7 +87,32 @@ _No planned tasks_
 |--------|--------|
 | Evolver | Not running |
 | Task Queue | Ready |
-| Auto-Sync | Enabled |
+| Auto-Sync | ✅ Enabled (auto-todo-sync.js) |
+| Auto-Memory | ✅ Enabled (auto-memory.js) |
+
+---
+
+## 状态驱动协议
+
+### 任务状态标记格式
+```markdown
+> Status: running|blocked|done|pending
+> UpdatedAt: YYYY-MM-DDTHH:mm:ss+08:00
+> Next: [下一步具体动作]
+> Attempts: [失败次数，可选]
+```
+
+### 状态变更即写入
+- 任务开始 → 更新 Status=running + UpdatedAt
+- 任务完成 → 更新 Status=done + 写 lessons.md
+- 遇到阻塞 → 更新 Status=blocked + Attempts++
+- 阻塞解决 → 更新 Status=running
+
+### 汇报规则
+- ✅ 任务完成 → 一次性通知
+- ❌ 阻塞≥3 次 → 求助
+- ⚠️ 严重问题 → 立即通知
+- 普通更新 → 不汇报
 
 ---
 
