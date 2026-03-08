@@ -1,0 +1,28 @@
+{
+  "name": "symphony-core",
+  "version": "0.1.0",
+  "description": "OpenClaw Symphony 核心编排器 - 基于 Symphony SPEC v1",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Tests not implemented yet\"",
+    "build": "echo \"Build not required for TypeScript\""
+  },
+  "dependencies": {
+    "chokidar": "^3.6.0",
+    "js-yaml": "^4.1.1",
+    "liquidjs": "^10.25.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0"
+  },
+  "keywords": [
+    "openclaw",
+    "symphony",
+    "orchestrator",
+    "agent",
+    "automation"
+  ],
+  "author": "xiaoxiaohuang",
+  "license": "Apache-2.0"
+}
