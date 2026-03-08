@@ -132,8 +132,8 @@
 
 ---
 
-**最后更新**: 2026-03-08 09:48
-**基于经验**: CosyVoice 3.0 安装任务反思
+**最后更新**: 2026-03-08 19:45
+**基于经验**: CosyVoice 3.0 安装 + MiroFish 部署 + Scrapling 整合 + GitNexus 封装
 
 ---
 
@@ -181,3 +181,160 @@ node scripts/auto-memory.js consolidate
 **自动化**: 
 - Windows Task Scheduler (推荐)
 - 或手动在周日 heartbeat 时运行
+
+---
+
+## 🎯 技能使用策略 (2026-03-08 新增 | 2026-03-08 19:47 更新)
+
+### 优先级选择（从高效到低效）
+```
+1️⃣ API 直接调用 → 最快，无 UI 开销
+2️⃣ 已安装 Skill → 检查 available_skills 列表
+3️⃣ find-skills 搜索 → 社区可能有现成方案
+4️⃣ 浏览器自动化 → 最后手段，效率最低
+```
+
+### 技能分类索引（53 个技能）
+
+#### 📡 信息获取 (6 个)
+| 技能 | 用途 | 状态 |
+|------|------|------|
+| scrapling-mcp | 自适应网页爬虫（反反爬） | ✅ 可用 |
+| gitnexus-web | GitHub 代码库分析 | ✅ 可用 |
+| exa-plus | Exa 神经搜索（付费） | ⏳ 需 API Key |
+| exa-web-search-free | Exa 免费搜索 | ✅ 可用 |
+| news-aggregator | 新闻汇总 | ✅ 可用 |
+| world-monitor | 后台监控 | ✅ 可用 |
+
+#### 🧠 记忆管理 (7 个)
+| 技能 | 用途 | 状态 |
+|------|------|------|
+| duckdb-memory | 本地 SQL 数据库 | ✅ 可用 |
+| memory-search-queue | 批量记忆搜索队列 | ✅ 可用 |
+| api-cache | API 响应缓存 | ✅ 可用 |
+| auto-memory | 自动记忆整理 | ✅ 可用 |
+| pdf2gep | PDF→GEP 资产转换 | ✅ 可用 |
+| jina-embeddings | 文本嵌入（Jina API） | ✅ 已配置 |
+| anterior-cingulate-memory | 冲突检测自检 | ✅ 可用 |
+
+#### 🤖 任务编排 (8 个)
+| 技能 | 用途 | 状态 |
+|------|------|------|
+| orchestrator | 多智能体并行编排 | ✅ 可用 |
+| subagent-queue | 子代理任务队列 | ✅ 可用 |
+| todo-manager | 待办事项管理 | ✅ 可用 |
+| todo-task-planning | 文件化任务规划 | ✅ 可用 |
+| planning-with-files | Manus 式规划 | ✅ 可用 |
+| stream-queue | 流式任务队列 | ✅ 可用 |
+| autonomous-tasks | 自主任务执行 | ✅ 可用 |
+| self-repair | 自动修复框架 | ✅ 可用 |
+
+#### 🎤 语音系统 (11 个)
+| 技能 | 用途 | 状态 |
+|------|------|------|
+| qwen3-tts | Qwen3 语音合成 | ⚠️ 需 Python 3.10+ |
+| voice-system-python | CosyVoice3 语音合成 | ✅ 可用 |
+| volcano-voice | 火山引擎 TTS | ⏳ 需 API 配置 |
+| voice-clone | 声音克隆 | ⏳ 需参考音频 |
+| whisper-local | 本地语音识别 | ✅ 可用 |
+| vad | 语音打断检测 | ✅ 可用 |
+| realtime-voice-chat | 实时语音对话 | ⏳ 需麦克风 |
+| voice-system | 完整语音链路 | ⏳ 需配置 |
+| tts | 基础 TTS | ✅ 可用 |
+| voice-llm-bridge | 语音 LLM 桥接 | ⏳ 待整合 |
+| voice-output | espeak-ng 输出 | ✅ 可用 |
+
+#### 📚 学术文档 (5 个)
+| 技能 | 用途 | 状态 |
+|------|------|------|
+| ml-paper-writing | ML/AI 论文写作 | ✅ 可用 |
+| research-paper-writer | 通用学术论文 | ✅ 可用 |
+| latex-paper-en | LaTeX 论文润色 | ✅ 可用 |
+| code-review-quality | 代码审查 | ✅ 可用 |
+| codemapper | AST 代码库映射 | ✅ 可用 |
+
+#### 🎭 人格互动 (5 个)
+| 技能 | 用途 | 状态 |
+|------|------|------|
+| green-tea-persona | 绿茶风格人格 | ✅ 可用 |
+| personas | 多人格切换 | ✅ 可用 |
+| surprise-protocol | 随机创意惊喜 | ✅ 可用 |
+| mind-blow | 思维爆炸生成 | ✅ 可用 |
+| agent-reach | 主动触达用户 | ✅ 可用 |
+
+#### 🔧 系统运维 (6 个)
+| 技能 | 用途 | 状态 |
+|------|------|------|
+| system-monitor | 系统监控诊断 | ✅ 可用 |
+| evolver | 自进化系统 | ✅ 运行中 |
+| feishu-evolver-wrapper | 飞书集成报告 | ⏳ 需飞书配置 |
+| clawdbot-backup | 配置备份同步 | ✅ 可用 |
+| network-automation-framework | 网络自动化 | ✅ 可用 |
+| browserwing | 浏览器自动化 | ✅ 可用 |
+
+#### 📱 社交媒体 (2 个)
+| 技能 | 用途 | 状态 |
+|------|------|------|
+| xiaohongshu-mcp | 小红书自动化 | ⏳ 需账号配置 |
+| browserwing | 浏览器自动化 | ✅ 可用 |
+
+#### 🎮 本地项目封装 (2 个)
+| 技能 | 用途 | 状态 |
+|------|------|------|
+| mirofish-mcp | 群体智能预测引擎 | ✅ 可用 |
+| worldview-mcp | 全球实时监控情报 (OSINT) | ✅ 可用 |
+
+#### 📦 其他 (3 个)
+| 技能 | 用途 | 状态 |
+|------|------|------|
+| autonomous-agent-patterns | 智能体设计模式 | 📖 参考文档 |
+| system-test | 系统测试 | ✅ 可用 |
+| voice-test | 语音测试 | ✅ 可用 |
+
+---
+
+### 决策树
+
+```
+需要新功能？
+    ↓
+有官方 API/CLI？ → 直接调用
+    ↓ 没有
+社区有现成 Skill？ → npx skills find
+    ↓ 没有
+需要编译依赖？ → 是 → 浏览器自动化封装
+    ↓ 否
+创建新 Skill
+```
+
+### 最佳实践
+
+| 场景 | 推荐做法 |
+|------|----------|
+| 大文件下载 (>100MB) | 后台进程 + 国内镜像 |
+| API 调用失败 (404/405) | 先分析状态机依赖 |
+| Python 包安装 | 先读版本要求 (Python 3.10+?) |
+| 编译依赖失败 | 找替代方案，不要硬刚 |
+| Cron 任务配置 | 显式指定 chatId，不用 "last" |
+| 新框架使用 | 先读 API 文档，不要假设 |
+| 长时任务 (>30 分钟) | 定期同步进度 |
+| 复杂任务 (5+ 步骤) | 用 orchestrator spawn 子代理团队 |
+
+### 效率提升数据
+
+| 方法 | 耗时 | 说明 |
+|------|------|------|
+| 单代理执行 | 4.5 小时 | CosyVoice 安装实例 |
+| 智能体团队 | ~1.5 小时 | 3-5 个子代理并行 |
+| **提升** | **3 倍** | 复杂任务推荐用团队 |
+
+---
+
+**今日新增经验 (2026-03-08)**:
+- ✅ Scrapling 整合：大文件下载后台运行
+- ✅ MiroFish 部署：API 状态机分析
+- ✅ GitNexus 封装：浏览器自动化替代编译
+- ✅ Qwen3-TTS 测试：Python 版本兼容性检查
+- ✅ Evolver Cron：显式指定 Telegram chatId
+- ✅ 技能分类索引：54 个技能 8 大类
+- ✅ WorldView 封装：OSINT 情报收集技能
