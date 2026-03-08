@@ -1,0 +1,24 @@
+{
+  "lastCheck": "2026-03-06T10:30:00+08:00",
+  "checks": {
+    "evolver": {
+      "status": "running",
+      "pid": 8840,
+      "lastCheck": "2026-03-06T10:30:00+08:00"
+    },
+    "git": {
+      "lastRun": "2026-03-06T10:30:00+08:00",
+      "repos": [
+        {"path": "workspace", "status": "clean", "branch": "main"}
+      ]
+    },
+    "tasks": {
+      "lastRun": "2026-03-06T10:30:00+08:00",
+      "active": ["TuriX-CUA-Windows"],
+      "blocked": [],
+      "completed": ["自主任务系统搭建", "Evolver + EvoMap 自进化系统"]
+    }
+  },
+  "pendingActions": [],
+  "nextHeartbeat": "2026-03-06T14:00:00+08:00"
+}

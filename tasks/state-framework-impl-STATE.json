@@ -1,0 +1,44 @@
+﻿{
+    "project":  "状态驱动框架实现",
+    "status":  "running",
+    "createdAt":  "2026-03-06",
+    "updatedAt":  "2026-03-06T10:50:21+08:00",
+    "currentPhase":  "PP4-集成测试",
+    "phases":  {
+                   "completed":  [
+                                     "框架文档",
+                                     "状态模板设计",
+                                     "Heartbeat 重构设计",
+                                     "P1-决策循环",
+                                     "P2: 状态变更自动写入",
+                                     "P3-Heartbeat 集成",
+                                     "PP4-集成测试"
+                                 ],
+                   "inProgress":  "P2-状态变更自动写入PP3-状态变更触发器PP4-集成测试PP4-集成测试",
+                   "pending":  [
+                                   {
+                                       "id":  "P4",
+                                       "name":  "集成测试",
+                                       "description":  "用 TuriX 项目测试完整流程",
+                                       "dependencies":  [
+                                                            "P1",
+                                                            "P2",
+                                                            "P3"
+                                                        ],
+                                       "estimatedSteps":  4
+                                   }
+                               ]
+               },
+    "blocker":  null,
+    "nextAction":  "用 TuriX 项目测试完整流程",
+    "deliverables":  [
+                         "scripts/state-decision-loop.ps1",
+                         "scripts/state-update.ps1",
+                         "HEARTBEAT.md updated with decision loop instructions",
+                         "P4: TuriX 测试运行 7 步，验证状态驱动流程完整"
+                     ],
+    "notes":  [
+                  "不要时间驱动（今天/本周/下周）",
+                  "状态驱动：读状态→做下一步→更新→循环"
+              ]
+}

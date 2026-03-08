@@ -1,0 +1,36 @@
+--- a/apps/vad-asr-chat-tts/src/pages/index.vue
++++ b/apps/vad-asr-chat-tts/src/pages/index.vue
+@@ -5,7 +5,7 @@ import { createWorkflow, getContext, workflowEvent } from '@llama-flow/core'
+ import { useElementBounding, useLocalStorage, useScroll } from '@vueuse/core'
+ import { generateSpeech } from '@xsai/generate-speech'
+ import { generateTranscription } from '@xsai/generate-transcription'
+-import { streamText } from '@xsai/stream-text'
++// import { streamText } from '@xsai/stream-text'  // 替换为 OpenClaw
+ import { nextTick, onUnmounted, ref, toRaw } from 'vue'
+ 
+ import FieldInput from '../components/FieldInput.vue'
+@@ -147,15 +147,15 @@ llmWorkflow.handle([llmTranscriptionEvent], async (event) => {
+     messages.value.push(streamingMessage.value)
+     const newMessages = messages.value.slice(0, messages.value.length - 1).map(msg => toRaw(msg))
+ 
+-    const res = await streamText({
+-      baseURL: llmProviderBaseURL.value,
+-      apiKey: llmProviderAPIKey.value,
+-      model: llmProviderModel.value,
+-      messages: newMessages as Message[],
+-    })
+-
+-    for await (const chunk of res) {
+-      context.sendEvent(llmChatCompletionsTokenEvent.with(chunk.choices[0]?.delta?.content || ''))
++    // 使用 OpenClaw 替代 GPT-4o
++    const { chatWithOpenClaw } = await import('../../../../../voice-llm-bridge/src/index')
++    
++    const reply = await chatWithOpenClaw(newMessages as Message[])
++    
++    // 逐字发送 (模拟流式)
++    for (const char of reply) {
++      context.sendEvent(llmChatCompletionsTokenEvent.with(char))
++      await new Promise(resolve => setTimeout(resolve, 30)) // 模拟流式延迟
+     }
+ 
+     context.sendEvent(llmChatCompletionsEndedEvent.with(streamingMessage.value.content!))

@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "description": "Task description",
+    "steps": [
+      "Step 1: Do something",
+      "Step 2: Verify result"
+    ],
+    "priority": "high",
+    "passes": false
+  }
+]

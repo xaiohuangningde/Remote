@@ -1,0 +1,23 @@
+{
+  "name": "@openclaw/stream-queue",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Event-driven stream queue for OpenClaw (extracted from Airi stream-kit)",
+  "author": "xiaoxiaohuang",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "types": "./src/queue.ts",
+      "default": "./src/queue.ts"
+    }
+  },
+  "main": "./src/queue.ts",
+  "types": "./src/queue.ts",
+  "files": [
+    "src",
+    "SKILL.md"
+  ],
+  "scripts": {
+    "test": "node --loader ts-node/esm test/queue.test.ts"
+  }
+}

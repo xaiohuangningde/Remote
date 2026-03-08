@@ -1,0 +1,3 @@
+utf-8: OK, has_chinese=False
+utf-16: OK, has_chinese=True
+SAVED to decoded_text.txt

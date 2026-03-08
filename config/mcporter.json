@@ -1,0 +1,36 @@
+{
+  "mcpServers": {
+    "exa": {
+      "baseUrl": "https://mcp.exa.ai/mcp"
+    },
+    "filesystem": {
+      "command": "npx -y @modelcontextprotocol/server-filesystem /"
+    },
+    "nexus": {
+      "command": "npx -y @iflow-mcp/nexus"
+    },
+    "json": {
+      "command": "npx -y @iflow-mcp/json-mcp-server"
+    },
+    "sqlite": {
+      "command": "npx -y mcp-sqlite"
+    },
+    "say": {
+      "command": "npx -y say-mcp"
+    },
+    "edge-tts": {
+      "command": "npx -y edge-tts"
+    },
+    "minimax": {
+      "command": "uvx minimax-mcp",
+      "env": {
+        "MINIMAX_API_KEY": "sk-cp-UHJzdpzMR2-9v0943CxKeej-1ENznAjnxUFdv0XnR4aSCNPdBEPjkQSMFZ5OX9QiMozoPZuzWoaylWoH1RfgWTkvIIg1rpMVPOpW9zwDiKVH4nrQGPVltxE",
+        "MINIMAX_API_HOST": "https://api.minimax.io"
+      }
+    },
+    "mcpadvisor": {
+      "command": "npx -y mcp-advisor"
+    }
+  },
+  "imports": []
+}

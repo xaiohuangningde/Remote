@@ -1,0 +1,29 @@
+{
+  "project": "TuriX-CUA-Windows",
+  "status": "running",
+  "createdAt": "2026-03-05",
+  "updatedAt": "2026-03-06T11:00:00+08:00",
+  "currentPhase": "功能测试进行中",
+  "phases": {
+    "completed": ["分支选择", "conda 环境创建", "依赖安装", "API 配置"],
+    "inProgress": ["功能测试"],
+    "pending": ["实际任务运行", "问题修复", "整合到工作流"]
+  },
+  "blocker": null,
+  "lastAction": "运行 main.py 测试，执行 7 步后退出（Step 7 错误）",
+  "nextAction": "分析 Step 7 错误原因，修复后重试",
+  "notes": [
+    "必须使用 multi-agent-windows 分支（main 只支持 macOS）",
+    "Python 3.10+  required（不支持 3.9 的类型语法）",
+    "API Provider: https://turixapi.io/v1"
+  ],
+  "deliverables": [
+    "E:\\TuriX-CUA-Windows\\ (项目目录)",
+    "E:\\Anaconda\\envs\\turix_windows_310\\ (conda 环境)",
+    "memory/2026-03-05.md (配置笔记)"
+  ],
+  "links": {
+    "github": "https://github.com/TurixAI/TuriX-CUA",
+    "config": "E:\\TuriX-CUA-Windows\\examples\\config.json"
+  }
+}

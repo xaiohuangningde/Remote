@@ -1,0 +1,132 @@
+[
+  {
+    "name": "ACM-ICPC",
+    "url": "https://icpc.global",
+    "status": "ok",
+    "status_code": 200,
+    "title": "N/A",
+    "has_chinese": false,
+    "has_2026": true,
+    "has_2025": false,
+    "response_time": 0.788579
+  },
+  {
+    "name": "蓝桥杯",
+    "url": "https://www.lanqiao.cn",
+    "status": "ok",
+    "status_code": 200,
+    "title": "连接高校和企业 - 蓝桥云课",
+    "has_chinese": true,
+    "has_2026": false,
+    "has_2025": false,
+    "response_time": 0.253852
+  },
+  {
+    "name": "百度之星",
+    "url": "https://astar.baidu.com",
+    "status": "error",
+    "error": "'gbk' codec can't encode character '\\xe7' in position 5: illegal multibyte sequence"
+  },
+  {
+    "name": "CCPC 中国大学生程序设计大赛",
+    "url": "https://www.ccpc.io",
+    "status": "error",
+    "error": "'gbk' codec can't encode character '\\xe4' in position 5: illegal multibyte sequence"
+  },
+  {
+    "name": "全国大学生广告艺术大赛",
+    "url": "https://www.sun-ad.com",
+    "status": "ok",
+    "status_code": 200,
+    "title": "N/A",
+    "has_chinese": false,
+    "has_2026": false,
+    "has_2025": false,
+    "response_time": 0.59942
+  },
+  {
+    "name": "未来设计师全国高校数字艺术设计大赛",
+    "url": "https://www.ncda.org.cn",
+    "status": "ok",
+    "status_code": 200,
+    "title": "未来设计师·全国高校数字艺术设计大赛（NCDA）",
+    "has_chinese": true,
+    "has_2026": false,
+    "has_2025": false,
+    "response_time": 0.248081
+  },
+  {
+    "name": "米兰设计周",
+    "url": "https://www.milanodesignweek.org",
+    "status": "ok",
+    "status_code": 403,
+    "title": "403 Forbidden",
+    "has_chinese": false,
+    "has_2026": false,
+    "has_2025": false,
+    "response_time": 0.601566
+  },
+  {
+    "name": "全国大学生机器人大赛",
+    "url": "http://www.curc.cn",
+    "status": "error",
+    "error": "'gbk' codec can't encode character '\\xe5' in position 5: illegal multibyte sequence"
+  },
+  {
+    "name": "全国大学生智能汽车竞赛",
+    "url": "https://www.smartcar.cn",
+    "status": "error",
+    "error": "HTTPSConnectionPool(host='www.smartcar.cn', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLCertVerificationError(1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.smartcar.cn'. (_ssl.c:1129)\")))"
+  },
+  {
+    "name": "中国机器人大赛",
+    "url": "http://www.chinarobot.org",
+    "status": "error",
+    "error": "'gbk' codec can't encode character '\\xe6' in position 5: illegal multibyte sequence"
+  },
+  {
+    "name": "外研社杯",
+    "url": "https://www.fltrp.com",
+    "status": "ok",
+    "status_code": 200,
+    "title": "N/A",
+    "has_chinese": false,
+    "has_2026": false,
+    "has_2025": false,
+    "response_time": 0.064512
+  },
+  {
+    "name": "21 世纪杯英语演讲",
+    "url": "https://www.21stcentury.com.cn",
+    "status": "error",
+    "error": "'gbk' codec can't encode character '\\xe4' in position 5: illegal multibyte sequence"
+  },
+  {
+    "name": "CATTI 杯翻译大赛",
+    "url": "https://www.catticenter.com",
+    "status": "error",
+    "error": "HTTPSConnectionPool(host='www.catticenter.com', port=443): Read timed out. (read timeout=10)"
+  },
+  {
+    "name": "全国大学生电子设计竞赛",
+    "url": "http://www.nuedc-training.com.cn",
+    "status": "ok",
+    "status_code": 200,
+    "title": "全国大学生电子设计竞赛培训网",
+    "has_chinese": true,
+    "has_2026": false,
+    "has_2025": false,
+    "response_time": 0.239392
+  },
+  {
+    "name": "全国大学生机械创新设计大赛",
+    "url": "http://www.nmec.org.cn",
+    "status": "ok",
+    "status_code": 200,
+    "title": "\r\n\t国家医学考试网\r\n",
+    "has_chinese": true,
+    "has_2026": false,
+    "has_2025": false,
+    "response_time": 0.572139
+  }
+]

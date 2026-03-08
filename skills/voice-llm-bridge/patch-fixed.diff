@@ -1,0 +1,47 @@
+--- a/apps/vad-asr-chat-tts/src/pages/index.vue
++++ b/apps/vad-asr-chat-tts/src/pages/index.vue
+@@ -5,7 +5,8 @@ import { createWorkflow, getContext, workflowEvent } from '@llama-flow/core'
+ import { useElementBounding, useLocalStorage, useScroll } from '@vueuse/core'
+ import { generateSpeech } from '@xsai/generate-speech'
+ import { generateTranscription } from '@xsai/generate-transcription'
+-import { streamText } from '@xsai/stream-text'
++// import { streamText } from '@xsai/stream-text'  // 替换为 OpenClaw
++import { streamChatWithOpenClaw } from '../../../../../voice-llm-bridge/src/index-fixed'
+ import { nextTick, onUnmounted, ref, toRaw } from 'vue'
+ 
+ import FieldInput from '../components/FieldInput.vue'
+@@ -147,20 +148,22 @@ llmWorkflow.handle([llmTranscriptionEvent], async (event) => {
+     messages.value.push(streamingMessage.value)
+     const newMessages = messages.value.slice(0, messages.value.length - 1).map(msg => toRaw(msg))
+ 
+-    const res = await streamText({
+-      baseURL: llmProviderBaseURL.value,
+-      apiKey: llmProviderAPIKey.value,
+-      model: llmProviderModel.value,
+-      messages: newMessages as Message[],
+-    })
+-
+-    for await (const textPart of asyncIteratorFromReadableStream(res.textStream, async v => v)) {
+-      fullText += textPart
+-      context.sendEvent(llmChatCompletionsTokenEvent.with(textPart))
+-    }
+-
+-    context.sendEvent(llmChatCompletionsEndedEvent.with(streamingMessage.value.content!))
++    // 使用 OpenClaw 替代 GPT-4o
++    let fullText = ''
++    
++    await streamChatWithOpenClaw(newMessages as Message[], {
++      onToken: (token: string) => {
++        fullText += token
++        context.sendEvent(llmChatCompletionsTokenEvent.with(token))
++      },
++      onEnd: (completeText: string) => {
++        context.sendEvent(llmChatCompletionsEndedEvent.with(completeText))
++      },
++      onError: (error: Error) => {
++        console.error('OpenClaw error:', error)
++      },
++    })
+   }
+   catch (error) {
+     console.error('Error sending message:', error)
