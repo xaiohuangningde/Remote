@@ -1,3 +1,13 @@
+
+## 2026-03-08 - Scripting
+
+**Pattern**: PowerShell strips JSON quotes
+
+**Solution**: Add regex fix to restore quotes before parsing
+
+
+
+---
 # Lessons Learned
 
 ## Correction Patterns

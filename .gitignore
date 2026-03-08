@@ -1,0 +1,91 @@
+# Dependencies
+node_modules/
+npm.bat
+package-lock.json
+skills-lock.json
+
+# IDE & Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# AI Agent Config (auto-generated, don't track)
+.agent/
+.agents/
+.claude/
+.clawhub/
+.codebuddy/
+.openclaw/
+.qwen/
+
+# Runtime & Logs
+log/
+logs/
+*.log
+tmp/
+temp/
+temp-skills/
+
+# Models & Large Files
+models/
+*.wav
+*.mp3
+*.pth
+*.onnx
+*.bin
+
+# Browser Data
+chrome_user_data/
+
+# Research & Downloads (keep research/ but ignore downloaded repos)
+research/*/node_modules/
+research/*/dist/
+research/*/build/
+
+# TuriX-CUA (separate project)
+TuriX-CUA/
+
+# AI Companion (separate project)
+ai-companion/
+
+# Autonomous (separate project)
+autonomous/
+
+# World Monitor (separate project)
+worldmonitor/
+world-monitor/
+
+# Test Files
+test_*.py
+test_*.mp3
+test_*.wav
+test_*.json
+*_test.py
+
+# Scripts (one-off)
+download-*.py
+run_*.py
+run_*.ps1
+maximize-chrome.ps1
+install-*.py
+install-*.bat
+
+# Config (sensitive or auto-generated)
+config.toml
+*.env
+.env.local
+
+# Build Outputs
+dist/
+build/
+*.tsbuildinfo
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Documentation (keep docs/ but ignore generated)
+docs/_build/
+docs/.docusaurus/
