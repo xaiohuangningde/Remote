@@ -1,0 +1,22 @@
+{
+  "name": "mirofish-mcp",
+  "version": "1.0.0",
+  "description": "MiroFish 群体智能预测引擎 OpenClaw 技能封装",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"No tests yet\"",
+    "health": "curl http://localhost:5001/api/health"
+  },
+  "keywords": [
+    "mirofish",
+    "simulation",
+    "multi-agent",
+    "prediction",
+    "openclaw-skill"
+  ],
+  "author": "xiaoxiaohuang",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {}
+}
