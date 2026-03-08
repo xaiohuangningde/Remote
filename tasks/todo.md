@@ -148,7 +148,9 @@ _No planned tasks_
 
 | System | Status |
 |--------|--------|
-| Evolver | Not running |
+| Evolver | ✅ Running (PID 28724) |
+| Memory Consolidation | ✅ Done (2026-03-08 15:38) |
+| GitNexus | ✅ Web UI skill created (`skills/gitnexus-web/`) |
 | Task Queue | Ready |
 | Auto-Sync | ✅ Enabled (auto-todo-sync.js) |
 | Auto-Memory | ✅ Enabled (auto-memory.js) |
