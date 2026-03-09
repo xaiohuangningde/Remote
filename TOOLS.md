@@ -45,6 +45,77 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 
 ---
 
+## 📊 Excel MCP Skill (2026-03-09 新增)
+
+### 位置
+`skills/excel-mcp/`
+
+### 功能
+- ✅ 读写 Excel (XLSX/XLS)
+- ✅ 单元格样式（字体/颜色/边框/对齐）
+- ✅ 多工作表管理
+- ✅ 中文完全支持
+
+### 使用方式
+
+#### 方式 1: 直接导入
+```javascript
+import { writeExcel, readExcel } from 'skills/excel-mcp/src/index.js'
+
+await writeExcel('output.xlsx', [['姓名', '年龄'], ['张三', 25]])
+const data = await readExcel('output.xlsx')
+```
+
+#### 方式 2: MCP 服务器
+在 `~/.openclaw/mcp.json` 添加：
+```json
+{
+  "mcpServers": {
+    "excel": {
+      "command": "node",
+      "args": ["skills/excel-mcp/src/mcp-server.js"]
+    }
+  }
+}
+```
+
+### 示例
+```bash
+cd skills/excel-mcp
+node examples/usage-examples.js
+```
+
+### 文档
+- `README.md` - 完整文档 (5KB)
+- `QUICKSTART.md` - 快速开始 (3KB)
+- `COMPLETION-REPORT.md` - 创建报告
+
+### 依赖
+- exceljs: ^4.4.0
+- 已安装：✅
+
+### 测试结果
+```
+📝 写入 Excel... ✅
+📖 读取 Excel... ✅
+📊 工作表操作... ✅
+🎨 单元格样式... ✅
+```
+
+### 与 Excelize 对比
+| 特性 | Excelize (Go) | Excel MCP (JS) |
+|------|---------------|----------------|
+| 语言 | Go | JavaScript |
+| 环境 | Go 1.24+ | Node.js |
+| 性能 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
+| 易用性 | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+
+**选择**: Node.js 环境 → Excel MCP（无需额外安装 Go）
+
+---
+
+---
+
 ## 🌐 浏览器自动化使用指南 (2026-03-06)
 
 ### 适用场景
