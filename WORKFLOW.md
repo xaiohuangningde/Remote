@@ -6,7 +6,7 @@ tracker:
   kind: github
   endpoint: https://api.github.com/graphql
   api_key: ${GITHUB_TOKEN}  # 从环境变量读取
-  project_slug: openclaw/openclaw  # 临时使用 OpenClaw 官方仓库测试
+  project_slug: xaiohuangning/test-symphony  # 测试仓库
   active_states: ["open"]
   terminal_states: ["closed"]
 

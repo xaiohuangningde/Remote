@@ -133,7 +133,7 @@ export async function createSymphony(
       logger.info('Stopping Symphony...')
       
       if (pollIntervalId) {
-        window.clearInterval(pollIntervalId)
+        clearInterval(pollIntervalId)
         pollIntervalId = null
       }
       

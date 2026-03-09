@@ -128,9 +128,10 @@ function normalizeIssue(
   raw: GitHubIssue,
   owner: string,
   repo: string
-): Issue {
+): Issue & { number: number } {
   return {
     id: raw.id,
+    number: raw.number,  // 添加 number 字段用于显示
     identifier: `GH-${raw.number}`,
     title: raw.title,
     description: raw.body,

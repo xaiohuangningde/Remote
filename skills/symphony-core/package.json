@@ -1,12 +1,15 @@
 {
   "name": "symphony-core",
-  "version": "0.1.0",
-  "description": "OpenClaw Symphony 核心编排器 - 基于 Symphony SPEC v1",
+  "version": "0.3.0",
+  "description": "Symphony - GitHub Issue Auto-Processor (Independent System)",
   "type": "module",
   "main": "src/index.ts",
+  "bin": {
+    "symphony": "./src/cli.ts"
+  },
   "scripts": {
-    "test": "echo \"Tests not implemented yet\"",
-    "build": "echo \"Build not required for TypeScript\""
+    "symphony": "tsx src/cli.ts",
+    "test": "tsx test/core.test.ts"
   },
   "dependencies": {
     "chokidar": "^3.6.0",
@@ -17,11 +20,12 @@
     "@types/node": "^20.0.0"
   },
   "keywords": [
-    "openclaw",
     "symphony",
-    "orchestrator",
-    "agent",
-    "automation"
+    "github",
+    "issue",
+    "automation",
+    "claude-code",
+    "cli"
   ],
   "author": "xiaoxiaohuang",
   "license": "Apache-2.0"

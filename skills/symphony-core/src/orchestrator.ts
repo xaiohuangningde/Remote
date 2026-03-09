@@ -1,15 +1,12 @@
 /**
- * Orchestrator - 核心编排器
+ * Orchestrator - 核心编排器（独立系统版本）
  * 
  * 负责任务轮询、分发、重试、协调
- * 维护单一权威运行时状态
+ * 使用 Claude Code 执行任务（独立于 OpenClaw）
  */
 
-// 注意：sessions_spawn 和 sessions_send 需要从 OpenClaw 运行时导入
-// 这里使用类型声明，实际调用时通过全局作用域或参数传入
-declare const sessions_spawn: any
-declare const sessions_send: any
-
+import { exec } from 'child_process'
+import { promisify } from 'util'
 import { ConfigLayer } from './config.ts'
 import { createGitHubAdapter } from '../../symphony-github/src/index.ts'
 import { createWorkspaceManager } from '../../symphony-workspace/src/index.ts'
@@ -21,17 +18,19 @@ import type {
   ValidationResult,
 } from './types.ts'
 
+const execAsync = promisify(exec)
+
 export interface OrchestratorOptions {
-  sessions_spawn: any
-  sessions_send: any
+  claudeTimeout?: number  // Claude Code 超时（毫秒），默认 1 小时
+  maxConcurrent?: number  // 最大并发 Claude Code 实例，默认 3
 }
 
 export class Orchestrator {
   private config: ConfigLayer
   private github: ReturnType<typeof createGitHubAdapter> | null = null
   private workspaceManager: ReturnType<typeof createWorkspaceManager> | null = null
-  private sessions_spawn: any
-  private sessions_send: any
+  private claudeTimeout: number
+  private maxConcurrent: number
   
   // 运行时状态
   private running = new Map<string, RunningEntry>()
@@ -53,8 +52,8 @@ export class Orchestrator {
 
   constructor(config: ConfigLayer, options?: OrchestratorOptions) {
     this.config = config
-    this.sessions_spawn = options?.sessions_spawn ?? globalThis.sessions_spawn
-    this.sessions_send = options?.sessions_send ?? globalThis.sessions_send
+    this.claudeTimeout = options?.claudeTimeout ?? 3600000  // 1 小时
+    this.maxConcurrent = options?.maxConcurrent ?? 3
   }
 
   /**
@@ -79,6 +78,40 @@ export class Orchestrator {
       hooks: this.config.getHooks(),
     })
     console.log('[Orchestrator] Workspace manager initialized')
+  }
+
+  /**
+   * 分发任务到 Claude Code
+   */
+  private async dispatchToClaude(
+    issue: Issue,
+    workspacePath: string,
+    prompt: string
+  ): Promise<{ success: boolean; output?: string; error?: string }> {
+    try {
+      // 使用 claude 命令（依赖 PATH 环境变量）
+      const command = `claude "${prompt.replace(/"/g, '\\"')}"`
+      
+      console.log(`[Claude] Executing in ${workspacePath}: ${command}`)
+      
+      const { stdout, stderr } = await execAsync(command, {
+        cwd: workspacePath,  // 在工作目录中执行
+        timeout: this.claudeTimeout,
+        maxBuffer: 10 * 1024 * 1024, // 10MB
+      })
+      
+      return {
+        success: true,
+        output: stdout,
+      }
+    } catch (error: any) {
+      console.error(`[Claude] Error: ${error.message}`)
+      return {
+        success: false,
+        error: error.message,
+        output: error.stdout,
+      }
+    }
   }
 
   /**
@@ -218,22 +251,22 @@ export class Orchestrator {
   }
 
   /**
-   * 启动 subagent
+   * 启动 Claude Code（替代 subagent）
    */
   private async launchAgent(
     issue: Issue,
     prompt: string,
     workspacePath: string
   ): Promise<string> {
-    const result = await sessions_spawn({
-      task: prompt,
-      mode: 'session',
-      runtime: 'subagent',
-      label: issue.identifier,
-      cwd: workspacePath,
-    })
+    // 调用 Claude Code
+    const result = await this.dispatchToClaude(issue, workspacePath, prompt)
     
-    return result.sessionKey
+    if (!result.success) {
+      throw new Error(`Claude Code failed: ${result.error}`)
+    }
+    
+    // 返回 session key（使用 issue ID 作为标识）
+    return `claude-${issue.id}`
   }
 
   /**
