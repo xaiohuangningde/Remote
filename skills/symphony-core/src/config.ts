@@ -166,7 +166,7 @@ export class ConfigLayer {
   }
 
   /**
-   * 解析路径（支持 ~ 展开）
+   * 解析路径（支持 ~ 和 ${VAR} 展开）
    */
   private resolvePath(value: string | undefined): string | undefined {
     if (!value) return undefined
@@ -175,6 +175,13 @@ export class ConfigLayer {
     if (value.startsWith('~')) {
       const home = process.env.HOME ?? process.env.USERPROFILE ?? ''
       return home + value.slice(1)
+    }
+    
+    // 展开 ${VAR_NAME} 格式
+    if (value.includes('${') && value.includes('}')) {
+      return value.replace(/\$\{([^}]+)\}/g, (match, varName) => {
+        return process.env[varName] ?? match
+      })
     }
     
     return value

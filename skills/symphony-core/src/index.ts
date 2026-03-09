@@ -14,6 +14,9 @@ import type { SymphonyConfig, RuntimeSnapshot } from './types.ts'
 
 export interface CreateSymphonyOptions {
   workflowPath?: string
+  // OpenClaw 函数注入（可选，默认使用 globalThis）
+  sessions_spawn?: any
+  sessions_send?: any
 }
 
 export interface Symphony {
@@ -60,7 +63,10 @@ export async function createSymphony(
   const config = new ConfigLayer(workflow.config)
   
   // 3. 创建编排器
-  const orchestrator = new Orchestrator(config)
+  const orchestrator = new Orchestrator(config, {
+    sessions_spawn: options.sessions_spawn ?? globalThis.sessions_spawn,
+    sessions_send: options.sessions_send ?? globalThis.sessions_send,
+  })
   
   // 4. 创建 HTTP 服务器（可选）
   let httpServer = null
@@ -101,7 +107,7 @@ export async function createSymphony(
       
       // 启动轮询循环
       const pollInterval = config.getPollInterval()
-      pollIntervalId = window.setInterval(async () => {
+      pollIntervalId = setInterval(async () => {
         try {
           await orchestrator.tick()
           

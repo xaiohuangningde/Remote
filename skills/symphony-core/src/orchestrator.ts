@@ -21,10 +21,17 @@ import type {
   ValidationResult,
 } from './types.ts'
 
+export interface OrchestratorOptions {
+  sessions_spawn: any
+  sessions_send: any
+}
+
 export class Orchestrator {
   private config: ConfigLayer
   private github: ReturnType<typeof createGitHubAdapter> | null = null
   private workspaceManager: ReturnType<typeof createWorkspaceManager> | null = null
+  private sessions_spawn: any
+  private sessions_send: any
   
   // 运行时状态
   private running = new Map<string, RunningEntry>()
@@ -44,8 +51,10 @@ export class Orchestrator {
   private pollIntervalId: ReturnType<typeof setInterval> | null = null
   private retryTimers = new Map<string, ReturnType<typeof setTimeout>>()
 
-  constructor(config: ConfigLayer) {
+  constructor(config: ConfigLayer, options?: OrchestratorOptions) {
     this.config = config
+    this.sessions_spawn = options?.sessions_spawn ?? globalThis.sessions_spawn
+    this.sessions_send = options?.sessions_send ?? globalThis.sessions_send
   }
 
   /**

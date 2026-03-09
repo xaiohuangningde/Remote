@@ -1,340 +1,337 @@
-# HEARTBEAT.md - 任务执行策略
+# HEARTBEAT.md - Task Execution Strategy
 
-> 核心：主动同步、智能协作、持续记录
+> Core: Proactive sync, smart collaboration, continuous logging
 
 ---
 
-## 📊 长任务进度同步
+## 📊 Long Task Progress Sync
 
-### 同步频率
-| 任务时长 | 同步频率 | 方式 |
-|----------|----------|------|
-| < 30 分钟 | 完成时汇报 | 一次性通知 |
-| 30-60 分钟 | 每 15 分钟 | 简短进度 |
-| > 60 分钟 | 每 30 分钟 | 详细进度 + 预计完成时间 |
+### Sync Frequency
+| Task Duration | Sync Frequency | Method |
+|---------------|----------------|--------|
+| < 30 min | Report on completion | One-time notification |
+| 30-60 min | Every 15 min | Brief progress |
+| > 60 min | Every 30 min | Detailed progress + ETA |
 
-### 同步内容
+### Sync Content
 ```markdown
-📊 进度更新
-- 当前阶段：XXX (3/5)
-- 完成度：60%
-- 耗时：45 分钟
-- 预计完成：17:30
-- 问题：0 个阻塞
+📊 Progress Update
+- Current phase: XXX (3/5)
+- Completion: 60%
+- Time spent: 45 min
+- ETA: 17:30
+- Blockers: 0
 ```
 
-### 关键节点立即通知
-- ✅ 阶段完成
-- ❌ 失败超过 2 次
-- ⚠️ 需要用户决定
-- 💡 发现更好的方案
+### Immediate Notifications for Key Milestones
+- ✅ Phase completed
+- ❌ Failed more than 2 times
+- ⚠️ Needs user decision
+- 💡 Found better approach
 
 ---
 
-## 🤖 智能体团队使用
+## 🤖 Smart Agent Team Usage
 
-### 何时启用 subagents
-| 任务类型 | 子代理数量 | 说明 |
-|----------|-----------|------|
-| 多步骤安装 | 3-5 个 | 并行下载、安装、测试 |
-| 研究探索 | 2-3 个 | 分工调研不同方案 |
-| 数据处理 | 2-4 个 | 并行处理不同数据块 |
-| 简单任务 | 0 个 | 主代理直接执行 |
+### When to Use Subagents
+| Task Type | Number of Agents | Description |
+|-----------|------------------|-------------|
+| Multi-step installation | 3-5 | Parallel download, install, test |
+| Research & exploration | 2-3 | Divide and research different approaches |
+| Data processing | 2-4 | Process different data chunks in parallel |
+| Simple tasks | 0 | Main agent handles directly |
 
-### 智能体架构
+### Agent Architecture
 ```
-主代理 (协调者)
-├─ 子代理 1: 任务 A
-├─ 子代理 2: 任务 B
-├─ 子代理 3: 任务 C
-└─ 主代理：协调 + 同步 + 问题解决
-```
-
-### 子代理管理
-- 创建时明确任务目标
-- 定期收集进度
-- 汇总后同步给用户
-- 遇到问题及时介入
-
----
-
-## 📝 记忆记录规则
-
-### 记录层级
-| 类型 | 文件 | 内容 |
-|------|------|------|
-| 日常记录 | `memory/日期.md` | 当天任务、对话、进展 |
-| 长期记忆 | `MEMORY.md` | 重要事件、用户偏好、经验 |
-| 任务状态 | `tasks/todo.md` | 待办事项、进度追踪 |
-| 经验教训 | 对应项目文档 | 可复用的方法、踩坑记录 |
-
-### 记录时机
-- 任务开始 → 创建任务文档
-- 关键决策 → 记录原因和方案
-- 任务完成 → 总结经验教训
-- 用户偏好 → 立即写入 MEMORY.md
-
-### 记录原则
-> "心里记住"不靠谱，写下来才持久！
-
----
-
-## ⚠️ 异常处理
-
-### 失败处理
-| 失败次数 | 行动 |
-|----------|------|
-| 第 1 次 | 自己尝试解决 |
-| 第 2 次 | 换方案继续试 |
-| 第 3 次 | 汇报用户，请求指导 |
-
-### 需要沟通的情况
-1. 需求不明确 → 问清楚再做
-2. 有多个方案 → 列出优劣让用户选
-3. 遇到技术难点 → 说明情况，给建议
-4. 需要外部资源 → 如发邮件、注册账号
-5. 可能失败的风险 → 提前告知
-
----
-
-## 🎯 核心原则
-
-```
-✅ 能自己解决就直接干
-❓ 不确定就先问清楚
-📝 做完一定记录经验
-🔄 遇到问题灵活调整
-💡 优先用最高效的方式
-🤖 复杂任务用智能体团队
+Main Agent (Coordinator)
+├─ Subagent 1: Task A
+├─ Subagent 2: Task B
+├─ Subagent 3: Task C
+└─ Main Agent: Coordinate + Sync + Problem Solving
 ```
 
----
-
-## 📋 检查清单
-
-### 任务开始时
-- [ ] 理解任务目标和约束
-- [ ] 评估复杂度（简单 vs 复杂）
-- [ ] 决定是否使用 subagents
-- [ ] 创建任务文档（复杂任务）
-
-### 任务执行中
-- [ ] 定期同步进度（长任务）
-- [ ] 关键节点立即通知
-- [ ] 失败 2 次后主动汇报
-- [ ] 收集子代理进度（如有）
-
-### 任务完成后
-- [ ] 交付结果
-- [ ] 记录经验到 memory/日期.md
-- [ ] 更新 tasks/todo.md 状态
-- [ ] 总结可复用的方法
+### Subagent Management
+- Define clear task goals when creating
+- Collect progress regularly
+- Sync summary to user
+- Intervene when problems arise
 
 ---
 
-**最后更新**: 2026-03-08 19:45
-**基于经验**: CosyVoice 3.0 安装 + MiroFish 部署 + Scrapling 整合 + GitNexus 封装
+## 📝 Memory Logging Rules
+
+### Logging Levels
+| Type | File | Content |
+|------|------|---------|
+| Daily notes | `memory/YYYY-MM-DD.md` | Today's tasks, conversations, progress |
+| Long-term memory | `MEMORY.md` | Important events, user preferences, lessons |
+| Task status | `tasks/todo.md` | Todo items, progress tracking |
+| Lessons learned | Project docs | Reusable methods, pitfall records |
+
+### When to Log
+- Task starts → Create task document
+- Key decisions → Record reasoning and solution
+- Task completes → Summarize lessons learned
+- User preferences → Write to MEMORY.md immediately
+
+### Logging Principle
+> "Mental notes" are unreliable, write it down to persist!
 
 ---
 
-## 🤖 AI 自主决策授权 (2026-03-08 生效)
+## ⚠️ Exception Handling
 
-> 用户授权：xiaoxiaohuang 可自主决定 heartbeat 检查频率和内容
+### Failure Handling
+| Failure Count | Action |
+|---------------|--------|
+| 1st | Try to solve yourself |
+| 2nd | Try alternative approach |
+| 3rd | Report to user, ask for guidance |
 
-### 自主检查清单
-
-**每次会话开始（必须）**：
-- [ ] 读取 `tasks/todo.md` - 检查新任务
-- [ ] 读取 `memory/昨天.md` + `memory/今天.md` - 了解上下文
-- [ ] `git status` - 项目状态
-- [ ] 检查 evolver/服务运行状态
-
-**定期扫描（灵活决定）**：
-- 项目进度卡住时 → 主动同步
-- 发现新问题 → 记录 + 通知
-- 任务完成 → 立即汇报 + 更新状态
-
-**每周日（固定）**：
-- [ ] Memory Consolidation - 合并本周日常记录到 MEMORY.md
-
-### 决策原则
-1. **不等待** - 发现任务直接干
-2. **透明** - 重大决策前同步
-3. **记录** - 所有行动写入 memory/日期.md
-4. **灵活** - 根据任务复杂度调整汇报频率
+### When to Communicate
+1. Unclear requirements → Ask before doing
+2. Multiple approaches → List pros/cons for user to decide
+3. Technical difficulties → Explain situation, give recommendations
+4. Needs external resources → e.g., send email, register account
+5. Risk of failure → Inform in advance
 
 ---
 
-## 📅 每周日自动任务
+## 🎯 Core Principles
 
-### Memory Consolidation (每周日 9:00 AM)
+```
+✅ Solve directly if you can
+❓ Ask first if unsure
+📝 Always document lessons after completion
+🔄 Be flexible when encountering problems
+💡 Prioritize most efficient approach
+🤖 Use agent teams for complex tasks
+```
 
-**命令**:
+---
+
+## 📋 Checklists
+
+### When Starting a Task
+- [ ] Understand task goals and constraints
+- [ ] Assess complexity (simple vs complex)
+- [ ] Decide whether to use subagents
+- [ ] Create task document (for complex tasks)
+
+### During Task Execution
+- [ ] Sync progress regularly (long tasks)
+- [ ] Immediate notification for key milestones
+- [ ] Report after 2 failures
+- [ ] Collect subagent progress (if any)
+
+### After Task Completion
+- [ ] Deliver results
+- [ ] Log lessons to memory/YYYY-MM-DD.md
+- [ ] Update tasks/todo.md status
+- [ ] Summarize reusable methods
+
+---
+
+**Last updated**: 2026-03-09 12:40
+**Based on experience**: CosyVoice 3.0 install + MiroFish deploy + Scrapling integration + GitNexus wrapper
+
+---
+
+## 🤖 AI Autonomous Decision Authorization (Effective 2026-03-08)
+
+> User authorization: xiaoxiaohuang can autonomously decide heartbeat check frequency and content
+
+### Autonomous Check Checklist
+
+**Every session start (mandatory)**:
+- [ ] Read `tasks/todo.md` - Check for new tasks
+- [ ] Read `memory/yesterday.md` + `memory/today.md` - Understand context
+- [ ] `git status` - Project status
+- [ ] Check evolver/service running status
+
+**Regular scans (flexible)**:
+- Project stuck → Proactively sync
+- Found new problem → Log + notify
+- Task completed → Report immediately + update status
+
+**Every Sunday (fixed)**:
+- [ ] Memory Consolidation - Merge weekly daily notes to MEMORY.md
+
+### Decision Principles
+1. **Don't wait** - Start working immediately when you find a task
+2. **Transparency** - Sync before major decisions
+3. **Documentation** - Write all actions to memory/YYYY-MM-DD.md
+4. **Flexibility** - Adjust reporting frequency based on task complexity
+
+---
+
+## 📅 Weekly Sunday Auto Tasks
+
+### Memory Consolidation (Every Sunday 9:00 AM)
+
+**Command**:
 ```powershell
 node scripts/auto-memory.js consolidate
 ```
 
-**作用**: 将本周的 `memory/YYYY-MM-DD.md` 文件合并到 `MEMORY.md`
+**Purpose**: Merge `memory/YYYY-MM-DD.md` files from this week into `MEMORY.md`
 
-**检查**: 每周日第一次 heartbeat 时运行
+**Check**: Run on first heartbeat of each Sunday
 
-**自动化**: 
-- Windows Task Scheduler (推荐)
-- 或手动在周日 heartbeat 时运行
-
----
-
-## 🎯 技能使用策略 (2026-03-08 新增 | 2026-03-08 19:47 更新)
-
-### 优先级选择（从高效到低效）
-```
-1️⃣ API 直接调用 → 最快，无 UI 开销
-2️⃣ 已安装 Skill → 检查 available_skills 列表
-3️⃣ find-skills 搜索 → 社区可能有现成方案
-4️⃣ 浏览器自动化 → 最后手段，效率最低
-```
-
-### 技能分类索引（53 个技能）
-
-#### 📡 信息获取 (6 个)
-| 技能 | 用途 | 状态 |
-|------|------|------|
-| scrapling-mcp | 自适应网页爬虫（反反爬） | ✅ 可用 |
-| gitnexus-web | GitHub 代码库分析 | ✅ 可用 |
-| exa-plus | Exa 神经搜索（付费） | ⏳ 需 API Key |
-| exa-web-search-free | Exa 免费搜索 | ✅ 可用 |
-| news-aggregator | 新闻汇总 | ✅ 可用 |
-| world-monitor | 后台监控 | ✅ 可用 |
-
-#### 🧠 记忆管理 (7 个)
-| 技能 | 用途 | 状态 |
-|------|------|------|
-| duckdb-memory | 本地 SQL 数据库 | ✅ 可用 |
-| memory-search-queue | 批量记忆搜索队列 | ✅ 可用 |
-| api-cache | API 响应缓存 | ✅ 可用 |
-| auto-memory | 自动记忆整理 | ✅ 可用 |
-| pdf2gep | PDF→GEP 资产转换 | ✅ 可用 |
-| jina-embeddings | 文本嵌入（Jina API） | ✅ 已配置 |
-| anterior-cingulate-memory | 冲突检测自检 | ✅ 可用 |
-
-#### 🤖 任务编排 (8 个)
-| 技能 | 用途 | 状态 |
-|------|------|------|
-| orchestrator | 多智能体并行编排 | ✅ 可用 |
-| subagent-queue | 子代理任务队列 | ✅ 可用 |
-| todo-manager | 待办事项管理 | ✅ 可用 |
-| todo-task-planning | 文件化任务规划 | ✅ 可用 |
-| planning-with-files | Manus 式规划 | ✅ 可用 |
-| stream-queue | 流式任务队列 | ✅ 可用 |
-| autonomous-tasks | 自主任务执行 | ✅ 可用 |
-| self-repair | 自动修复框架 | ✅ 可用 |
-
-#### 🎤 语音系统 (11 个)
-| 技能 | 用途 | 状态 |
-|------|------|------|
-| qwen3-tts | Qwen3 语音合成 | ⚠️ 需 Python 3.10+ |
-| voice-system-python | CosyVoice3 语音合成 | ✅ 可用 |
-| volcano-voice | 火山引擎 TTS | ⏳ 需 API 配置 |
-| voice-clone | 声音克隆 | ⏳ 需参考音频 |
-| whisper-local | 本地语音识别 | ✅ 可用 |
-| vad | 语音打断检测 | ✅ 可用 |
-| realtime-voice-chat | 实时语音对话 | ⏳ 需麦克风 |
-| voice-system | 完整语音链路 | ⏳ 需配置 |
-| tts | 基础 TTS | ✅ 可用 |
-| voice-llm-bridge | 语音 LLM 桥接 | ⏳ 待整合 |
-| voice-output | espeak-ng 输出 | ✅ 可用 |
-
-#### 📚 学术文档 (5 个)
-| 技能 | 用途 | 状态 |
-|------|------|------|
-| ml-paper-writing | ML/AI 论文写作 | ✅ 可用 |
-| research-paper-writer | 通用学术论文 | ✅ 可用 |
-| latex-paper-en | LaTeX 论文润色 | ✅ 可用 |
-| code-review-quality | 代码审查 | ✅ 可用 |
-| codemapper | AST 代码库映射 | ✅ 可用 |
-
-#### 🎭 人格互动 (5 个)
-| 技能 | 用途 | 状态 |
-|------|------|------|
-| green-tea-persona | 绿茶风格人格 | ✅ 可用 |
-| personas | 多人格切换 | ✅ 可用 |
-| surprise-protocol | 随机创意惊喜 | ✅ 可用 |
-| mind-blow | 思维爆炸生成 | ✅ 可用 |
-| agent-reach | 主动触达用户 | ✅ 可用 |
-
-#### 🔧 系统运维 (6 个)
-| 技能 | 用途 | 状态 |
-|------|------|------|
-| system-monitor | 系统监控诊断 | ✅ 可用 |
-| evolver | 自进化系统 | ✅ 运行中 |
-| feishu-evolver-wrapper | 飞书集成报告 | ⏳ 需飞书配置 |
-| clawdbot-backup | 配置备份同步 | ✅ 可用 |
-| network-automation-framework | 网络自动化 | ✅ 可用 |
-| browserwing | 浏览器自动化 | ✅ 可用 |
-
-#### 📱 社交媒体 (2 个)
-| 技能 | 用途 | 状态 |
-|------|------|------|
-| xiaohongshu-mcp | 小红书自动化 | ⏳ 需账号配置 |
-| browserwing | 浏览器自动化 | ✅ 可用 |
-
-#### 🎮 本地项目封装 (2 个)
-| 技能 | 用途 | 状态 |
-|------|------|------|
-| mirofish-mcp | 群体智能预测引擎 | ✅ 可用 |
-| worldview-mcp | 全球实时监控情报 (OSINT) | ✅ 可用 |
-
-#### 📦 其他 (3 个)
-| 技能 | 用途 | 状态 |
-|------|------|------|
-| autonomous-agent-patterns | 智能体设计模式 | 📖 参考文档 |
-| system-test | 系统测试 | ✅ 可用 |
-| voice-test | 语音测试 | ✅ 可用 |
+**Automation**: 
+- Windows Task Scheduler (recommended)
+- Or manually run on Sunday heartbeat
 
 ---
 
-### 决策树
+## 🎯 Skill Usage Strategy (Updated 2026-03-09 12:40)
+
+### Priority Selection (High to Low Efficiency)
+```
+1️⃣ Direct API call → Fastest, no UI overhead
+2️⃣ Installed Skill → Check available_skills list
+3️⃣ find-skills search → Community may have ready solutions
+4️⃣ Browser automation → Last resort, lowest efficiency
+```
+
+### Skill Category Index (54 skills)
+
+#### 📡 Information Retrieval (6 skills)
+| Skill | Purpose | Status |
+|-------|---------|--------|
+| scrapling-mcp | Adaptive web scraper (anti-anti-scraping) | ✅ Available |
+| gitnexus-web | GitHub codebase analysis | ✅ Available |
+| exa-plus | Exa neural search (paid) | ⏳ Needs API Key |
+| exa-web-search-free | Exa free search | ✅ Available |
+| news-aggregator | News aggregation | ✅ Available |
+| world-monitor | Background monitoring | ✅ Available |
+
+#### 🧠 Memory Management (7 skills)
+| Skill | Purpose | Status |
+|-------|---------|--------|
+| duckdb-memory | Local SQL database | ✅ Available |
+| memory-search-queue | Batch memory search queue | ✅ Available |
+| api-cache | API response cache | ✅ Available |
+| auto-memory | Automatic memory organization | ✅ Available |
+| pdf2gep | PDF→GEP asset conversion | ✅ Available |
+| jina-embeddings | Text embeddings (Jina API) | ✅ Configured |
+| anterior-cingulate-memory | Conflict detection self-check | ✅ Available |
+
+#### 🤖 Task Orchestration (8 skills)
+| Skill | Purpose | Status |
+|-------|---------|--------|
+| orchestrator | Multi-agent parallel orchestration | ✅ Available |
+| subagent-queue | Subagent task queue | ✅ Available |
+| todo-manager | Todo management | ✅ Available |
+| todo-task-planning | File-based task planning | ✅ Available |
+| planning-with-files | Manus-style planning | ✅ Available |
+| stream-queue | Stream task queue | ✅ Available |
+| autonomous-tasks | Autonomous task execution | ✅ Available |
+| self-repair | Auto-repair framework | ✅ Available |
+
+#### 🎤 Voice System (11 skills)
+| Skill | Purpose | Status |
+|-------|---------|--------|
+| qwen3-tts | Qwen3 TTS | ⚠️ Needs Python 3.10+ |
+| voice-system-python | CosyVoice3 TTS | ✅ Available |
+| volcano-voice | VolcEngine TTS | ⏳ Needs API config |
+| voice-clone | Voice cloning | ⏳ Needs reference audio |
+| whisper-local | Local speech recognition | ✅ Available |
+| vad | Voice activity detection | ✅ Available |
+| realtime-voice-chat | Real-time voice chat | ⏳ Needs microphone |
+| voice-system | Full voice pipeline | ⏳ Needs config |
+| tts | Basic TTS | ✅ Available |
+| voice-llm-bridge | Voice LLM bridge | ⏳ Pending integration |
+| voice-output | espeak-ng output | ✅ Available |
+
+#### 📚 Academic Documents (5 skills)
+| Skill | Purpose | Status |
+|-------|---------|--------|
+| ml-paper-writing | ML/AI paper writing | ✅ Available |
+| research-paper-writer | General academic papers | ✅ Available |
+| latex-paper-en | LaTeX paper polishing | ✅ Available |
+| code-review-quality | Code review | ✅ Available |
+| codemapper | AST codebase mapping | ✅ Available |
+
+#### 🎭 Personality Interaction (5 skills)
+| Skill | Purpose | Status |
+|-------|---------|--------|
+| green-tea-persona | Green tea style persona | ✅ Available |
+| personas | Multi-persona switching | ✅ Available |
+| surprise-protocol | Random creative surprises | ✅ Available |
+| mind-blow | Mind-blowing insight generation | ✅ Available |
+| agent-reach | Proactive user outreach | ✅ Available |
+
+#### 🔧 System Operations (6 skills)
+| Skill | Purpose | Status |
+|-------|---------|--------|
+| system-monitor | System monitoring & diagnosis | ✅ Available |
+| evolver | Self-evolution system | ✅ Running |
+| feishu-evolver-wrapper | Feishu integrated reporting | ⏳ Needs Feishu config |
+| clawdbot-backup | Config backup & sync | ✅ Available |
+| network-automation-framework | Network automation | ✅ Available |
+| browserwing | Browser automation | ✅ Available |
+
+#### 📱 Social Media (2 skills)
+| Skill | Purpose | Status |
+|-------|---------|--------|
+| xiaohongshu-mcp | Xiaohongshu automation | ⏳ Needs account config |
+| browserwing | Browser automation | ✅ Available |
+
+#### 🎮 Local Project Wrappers (2 skills)
+| Skill | Purpose | Status |
+|-------|---------|--------|
+| mirofish-mcp | Swarm intelligence prediction engine | ✅ Available |
+| worldview-mcp | Global real-time intelligence (OSINT) | ✅ Available |
+
+#### 📦 Others (3 skills)
+| Skill | Purpose | Status |
+|-------|---------|--------|
+| autonomous-agent-patterns | Agent design patterns | 📖 Reference docs |
+| system-test | System testing | ✅ Available |
+| voice-test | Voice testing | ✅ Available |
+
+---
+
+### Decision Tree
 
 ```
-需要新功能？
+Need new feature?
     ↓
-有官方 API/CLI？ → 直接调用
-    ↓ 没有
-社区有现成 Skill？ → npx skills find
-    ↓ 没有
-需要编译依赖？ → 是 → 浏览器自动化封装
-    ↓ 否
-创建新 Skill
+Has official API/CLI? → Call directly
+    ↓ No
+Community has ready Skill? → npx skills find
+    ↓ No
+Needs compile dependencies? → Yes → Browser automation wrapper
+    ↓ No
+Create new Skill
 ```
 
-### 最佳实践
+### Best Practices
 
-| 场景 | 推荐做法 |
-|------|----------|
-| 大文件下载 (>100MB) | 后台进程 + 国内镜像 |
-| API 调用失败 (404/405) | 先分析状态机依赖 |
-| Python 包安装 | 先读版本要求 (Python 3.10+?) |
-| 编译依赖失败 | 找替代方案，不要硬刚 |
-| Cron 任务配置 | 显式指定 chatId，不用 "last" |
-| 新框架使用 | 先读 API 文档，不要假设 |
-| 长时任务 (>30 分钟) | 定期同步进度 |
-| 复杂任务 (5+ 步骤) | 用 orchestrator spawn 子代理团队 |
+| Scenario | Recommended Approach |
+|----------|---------------------|
+| Large file download (>100MB) | Background process + domestic mirror |
+| API call fails (404/405) | Analyze state machine dependencies first |
+| Python package install | Read version requirements first (Python 3.10+?) |
+| Compile dependencies fail | Find alternatives, don't force it |
+| Cron task config | Explicitly specify chatId, don't use "last" |
+| Using new framework | Read API docs first, don't assume |
+| Long tasks (>30 min) | Sync progress regularly |
+| Complex tasks (5+ steps) | Use orchestrator to spawn agent team |
 
-### 效率提升数据
+### Efficiency Improvement Data
 
-| 方法 | 耗时 | 说明 |
-|------|------|------|
-| 单代理执行 | 4.5 小时 | CosyVoice 安装实例 |
-| 智能体团队 | ~1.5 小时 | 3-5 个子代理并行 |
-| **提升** | **3 倍** | 复杂任务推荐用团队 |
+| Method | Time | Description |
+|--------|------|-------------|
+| Single agent execution | 4.5 hours | CosyVoice install example |
+| Agent team | ~1.5 hours | 3-5 subagents in parallel |
+| **Improvement** | **3x** | Recommend team for complex tasks |
 
 ---
 
-**今日新增经验 (2026-03-08)**:
-- ✅ Scrapling 整合：大文件下载后台运行
-- ✅ MiroFish 部署：API 状态机分析
-- ✅ GitNexus 封装：浏览器自动化替代编译
-- ✅ Qwen3-TTS 测试：Python 版本兼容性检查
-- ✅ Evolver Cron：显式指定 Telegram chatId
-- ✅ 技能分类索引：54 个技能 8 大类
-- ✅ WorldView 封装：OSINT 情报收集技能
+**Today's New Lessons (2026-03-09)**:
+- ✅ Origin MCP: Manual restart when auto fails
+- ✅ File encoding: Use English to avoid garbled characters
+- ✅ Evolver cron: Fixed with explicit Telegram chatId
+- ✅ Skill count: 54 skills in 8 categories

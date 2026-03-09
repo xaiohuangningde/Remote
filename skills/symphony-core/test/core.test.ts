@@ -12,7 +12,7 @@ async function test() {
   try {
     // 1. 加载 WORKFLOW.md
     console.log('📖 加载 WORKFLOW.md...')
-    const loader = new WorkflowLoader('../../WORKFLOW.md')
+    const loader = new WorkflowLoader('./WORKFLOW.md')
     const workflow = await loader.load()
     
     console.log(`✅ WORKFLOW.md 加载成功 (${workflow.prompt_template.length} 字符)\n`)
