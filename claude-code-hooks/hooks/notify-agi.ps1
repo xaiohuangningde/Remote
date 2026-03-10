@@ -155,10 +155,12 @@ if ((Get-Command $OpenclawBin -ErrorAction SilentlyContinue)) {
     } else { "" }
     $Summary = $Summary -replace "`n", " "
     
-    $Msg = "🤖 *Claude Code Task Complete*
+    $Msg = @"
+🤖 *Claude Code Task Complete*
 📋 Task: ${TaskName}
 📝 Result:
-```$($Summary.Substring(0, [Math]::Min(800, $Summary.Length)))```"
+``````$($Summary.Substring(0, [Math]::Min(800, $Summary.Length)))``````
+"@
 
     try {
         if ($TelegramGroup) {
