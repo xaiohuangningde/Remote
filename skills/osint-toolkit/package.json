@@ -1,0 +1,26 @@
+{
+  "name": "osint-toolkit",
+  "version": "1.0.0",
+  "description": "OSINT 开源情报收集工具封装",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "node --loader ts-node/esm test/osint.test.ts",
+    "test:sherlock": "node --loader ts-node/esm test/sherlock.test.ts"
+  },
+  "keywords": [
+    "osint",
+    "sherlock",
+    "abuseipdb",
+    "shodan",
+    "censys",
+    "security"
+  ],
+  "author": "xiaoxiaohuang",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
+  }
+}
